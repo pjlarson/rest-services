@@ -1,13 +1,12 @@
 
-#IntelliJ
+##IntelliJ
 
 .idea/
 *.iml
 
-#Gradle
+##Gradle
 
 .gradle
-gradle/
 build/
 
 #Maven
