@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Profile
 import org.springframework.hateoas.EntityLinks
 import org.springframework.hateoas.ExposesResourceFor
+import org.springframework.hateoas.*
+import org.springframework.hateoas.Resource
 import org.springframework.hateoas.Resources
 import org.springframework.hateoas.jaxrs.JaxRsLinkBuilder
 import org.springframework.stereotype.Component
 
 import javax.annotation.PostConstruct
-import javax.ws.rs.DELETE
+import javax.ws.rs.*
 import javax.ws.rs.GET
 import javax.ws.rs.POST
 import javax.ws.rs.Path
@@ -45,10 +47,6 @@ class BookController {
 
     @PostConstruct
     def init(){
-        Book book = new Book();
-        book.application = 'Murex'
-        book.bookName = 'ABC'
-        bookRepository.save(book)
     }
 
 //    @GET
@@ -75,8 +73,17 @@ class BookController {
 
     @GET
     @Path("{id}")
-    public Book findOne(@PathParam('id')Long id){
-        return bookRepository.findOne(id)
+    public Response findOne(@PathParam('id')Long id){
+
+        Book book = bookRepository.findOne(id)
+
+        Resource<Book> resource = new Resource<>(book)
+
+        Link selfRel = entityLinks.linkToSingleResource(Book.class, book.id).withSelfRel()
+
+        resource.add(selfRel)
+
+        Response.ok(resource).build()
     }
 
     @DELETE

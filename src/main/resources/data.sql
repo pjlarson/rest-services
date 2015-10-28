@@ -1,1 +1,3 @@
-INSERT INTO Book (book_name, application) VALUES ('RATS', 'ABC');
+INSERT INTO Book (book_name, application) VALUES ('ABC', 'RATS');
+INSERT INTO Book (book_name, application) VALUES ('ABC', 'Murex');
+

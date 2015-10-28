@@ -24,14 +24,14 @@ class BookControllerTest extends spock.lang.Specification {
     RestTemplate restTemplate = new TestRestTemplate()
 
 
-    def "Test item GET"() {
+    def "Test single item GET"() {
 
         when:
-        ResponseEntity<Book> entity = restTemplate.getForEntity("http://localhost:9000/api/book", Book.class)
+        ResponseEntity<Book> entity = restTemplate.getForEntity("http://localhost:9000/api/book/1", Book.class)
 
         then:
         entity.statusCode.is2xxSuccessful() == true
-        entity.body.status == 'Hello'
+        entity.body.bookName == 'ABC'
 
     }
 
@@ -52,5 +52,8 @@ class BookControllerTest extends spock.lang.Specification {
         book.bookName == '1234'
 
     }
+
+
+
 
 }
