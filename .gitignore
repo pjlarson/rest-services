@@ -1,4 +1,15 @@
+
+#IntelliJ
+
 .idea/
-.gradle
 *.iml
+
+#Gradle
+
+.gradle
 gradle/
+build/
+
+#Maven
+
+target/
